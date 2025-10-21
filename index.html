@@ -3,73 +3,156 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Joker Tennis</title>
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.3.2/dist/tailwind.min.css" rel="stylesheet">
+  <title>Joker Tennis</title> 
+
+  <!-- Speed Hints -->
+  <link rel="dns-prefetch" href="https://connect.facebook.net">
+  <link rel="dns-prefetch" href="https://cdn.simpleicons.org">
+  <link rel="preconnect" href="https://connect.facebook.net" crossorigin>
+  <link rel="preconnect" href="https://cdn.simpleicons.org" crossorigin>
+  
+  <!-- Preload & Prefetch Images -->
+  <link rel="preload" as="image" href="bbcc.webp" type="image/webp" />
+  <link rel="prefetch" href="bbcc.jpg" as="image" />
+
   <style>
-    body {
-      background: #0a0a0a;
-      color: white;
-      font-family: 'Inter', sans-serif;
-      text-align: center;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      height: 100vh;
-      margin: 0;
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body {
+      width: 100%; height: 100%;
+      background: #fff;
+      font-family: system-ui, sans-serif;
+      display: flex; justify-content: center; align-items: center;
     }
-    .subscriber-counter {
-      font-size: 1.5rem;
-      font-weight: 600;
-      color: #10b981;
-      margin-top: 0.25rem;
+    .box-container {
+      position: relative; width: 92%; max-width: 420px; padding: 3px; border-radius: 12px;
     }
-    .cta-btn {
-      background: linear-gradient(90deg, #06b6d4, #3b82f6);
-      color: white;
-      padding: 0.8rem 2rem;
-      border-radius: 9999px;
-      font-weight: 700;
-      font-size: 1.1rem;
-      margin-top: 1.2rem;
-      transition: transform 0.2s ease, opacity 0.2s ease;
+    .box-container::before {
+      content: ""; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+      border-radius: 12px; padding: 3px;
+      background: linear-gradient(90deg, #000, gold, #000);
+      background-size: 600% 600%;
+      animation: borderMove 3s linear infinite;
+      z-index: 1; pointer-events: none;
     }
-    .cta-btn:hover {
-      transform: scale(1.05);
-      opacity: 0.9;
+    @keyframes borderMove {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
     }
+    .box {
+      background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(6px);
+      border-radius: 10px; padding: 20px; position: relative; z-index: 2; text-align: center;
+    }
+    picture.dp, img.dp {
+      width: 100px; height: 100px; border-radius: 50%; object-fit: cover; margin-bottom: 16px;
+    }
+    h1 { color: #002060; font-size: 26px; margin-bottom: 16px; }
+    .subscribers { font-size: 15px; color: #000; margin-bottom: 18px; }
+    h2 { color: #002060; font-size: 18px; margin-bottom: 20px; }
+    .countdown {
+      background: #ff0055; color: #fff; font-size: 14px; padding: 12px;
+      border-radius: 5px; margin-bottom: 22px;
+    }
+    .telegram-btn {
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+      width: 100%; background: #229ED9; color: white; font-size: 15px;
+      font-weight: bold; padding: 12px 0; border-radius: 40px; text-decoration: none;
+      margin-bottom: 16px; animation: pulse 1.4s infinite; transition: background 0.3s ease;
+    }
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.05); opacity: 0.95; }
+    }
+    .telegram-btn img { width: 18px; height: 18px; display: block; }
+    .note { font-size: 14px; color: #111; font-weight: bold; }
   </style>
 </head>
 <body>
-  <div class="flex flex-col items-center">
-    <!-- Channel DP -->
-    <img src="joker.webp" alt="Joker Tennis DP" width="120" height="120" class="rounded-full mb-4 shadow-lg">
+  <div class="box-container">
+    <div class="box">
+      <picture>
+        <source srcset="joker.webp" type="image/webp">
+        <img 
+          src="joker.webp"  
+          alt="joker tennis dp"  
+          class="dp"
+          width="100" 
+          height="100" 
+          loading="eager"
+          decoding="async"
+          fetchpriority="high"
+        />
+      </picture>
 
-    <!-- Channel Heading -->
-    <h1 class="text-3xl font-bold text-white">Joker Tennis</h1>
+      <h1>Joker Tennis</h1> 
+      <div class="subscribers"><span id="subscriberCount"></span> Subscribers</div>
+      <h2>India's No. 1 Tennis Expert</h2>
+      <div class="countdown" id="countdownBox">Free Joining Ends In <span id="timer">20</span> Seconds</div>
+      
+      <a href="https://telegram.me/+XfMvGucXB3RiMjQ9" id="telegramBtn" class="telegram-btn">
+        <img src="https://cdn.simpleicons.org/telegram/FFFFFF" 
+             alt="Telegram" 
+             width="18" 
+             height="18" 
+             loading="lazy" />
+        JOIN FREE TELEGRAM
+      </a>
 
-    <!-- Subscriber Counter -->
-    <div class="subscriber-counter" id="subscriberCount">43,989</div>
-
-    <!-- Tagline -->
-    <p class="text-gray-300 text-lg mt-2">All Tennis Matches Reports Here.</p>
-
-    <!-- CTA Button -->
-    <a href="https://t.me/yourchannel" class="cta-btn">Join My Free Telegram Channel</a>
-
-    <!-- Bottom Line -->
-    <p class="text-gray-400 text-sm mt-6">Sabse Genuine and Accurate Kaam Milega Yaha par.</p>
+      <div class="note">🔔All Tennis League Matches Reports🔔</div>
+    </div>
   </div>
 
-  <script>
-    let count = 43989;
-    const counterEl = document.getElementById('subscriberCount');
+  <script defer>
+    // Subscriber counter
+    const start = 43800, end = 43990, duration = 4000;
+    const interval = duration / (end - start);
+    let count = start;
+    const counter = document.getElementById("subscriberCount");
+    counter.textContent = start.toLocaleString("en-IN"); // formatted from start
 
-    function updateCount() {
+    const counterInterval = setInterval(() => {
       count++;
-      counterEl.textContent = count.toLocaleString();
-    }
+      counter.textContent = count.toLocaleString("en-IN");
+      if (count >= end) clearInterval(counterInterval);
+    }, interval);
 
-    setInterval(updateCount, 1000);
+    // Countdown timer
+    let timeLeft = 20;
+    const timer = document.getElementById("timer");
+    const countdownBox = document.getElementById("countdownBox");
+    const telegramBtn = document.getElementById("telegramBtn");
+
+    const countdown = setInterval(() => {
+      timeLeft--;
+      timer.textContent = timeLeft;
+      if (timeLeft <= 0) {
+        clearInterval(countdown);
+        countdownBox.textContent = "Offer Expired! Redirecting...";
+        setTimeout(() => {
+          window.location.href = telegramBtn.href;
+        }, 1500);
+      }
+    }, 1000);
   </script>
+
+  <!-- Meta Pixel Code (Deferred for faster page load) -->
+  <script>
+    (window.requestIdleCallback || function(cb){setTimeout(cb,1)})(function() {
+      !function(f,b,e,v,n,t,s)
+      {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+      n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+      if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+      n.queue=[];t=b.createElement(e);t.async=!0;
+      t.src=v;s=b.getElementsByTagName(e)[0];
+      s.parentNode.insertBefore(t,s)}(window, document,'script',
+      'https://connect.facebook.net/en_US/fbevents.js');
+      fbq('init', '495556870080076');
+      fbq('track', 'PageView');
+    });
+  </script>
+  <noscript>
+    <img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=495556870080076&ev=PageView&noscript=1"/>
+  </noscript>
 </body>
 </html>
